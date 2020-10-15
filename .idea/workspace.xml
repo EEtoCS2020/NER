@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f35649e6-404f-430f-abf3-fe94f48b0147" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bilstm_crf_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/crf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/chinese_medicine/normalize_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crf.py" beforeDir="false" afterPath="$PROJECT_DIR$/crf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/example_datasets1/vocabs/id2t.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/example_datasets1/vocabs/id2t.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/example_datasets1/vocabs/t2id.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/example_datasets1/vocabs/t2id.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.png" beforeDir="false" afterPath="$PROJECT_DIR$/model.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,14 +34,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sequence-labeling-BiLSTM-CRF" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/Utils" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/model" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.lr_demo">
+  <component name="RunManager" selected="Python.main">
     <configuration name="lr_demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="NER" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,6 +102,8 @@
       <updated>1602501385148</updated>
       <workItem from="1602501386161" duration="3569000" />
       <workItem from="1602641475993" duration="6085000" />
+      <workItem from="1602680642132" duration="943000" />
+      <workItem from="1602742728682" duration="1359000" />
     </task>
     <servers />
   </component>
@@ -104,29 +111,43 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2874" y="297" key="FileChooserDialogImpl" timestamp="1602666267060">
+    <state x="2874" y="297" width="424" height="482" key="FileChooserDialogImpl" timestamp="1602749575137">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2874" y="297" key="FileChooserDialogImpl/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1602666267060" />
-    <state width="1809" height="289" key="GridCell.Tab.0.bottom" timestamp="1602507180855">
-      <screen x="65" y="24" width="1855" height="1056" />
+    <state x="2874" y="297" width="424" height="482" key="FileChooserDialogImpl/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1602749575137" />
+    <state width="1809" height="289" key="GridCell.Tab.0.bottom" timestamp="1602681585969">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1809" height="289" key="GridCell.Tab.0.bottom/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1602681585969" />
     <state width="1809" height="289" key="GridCell.Tab.0.bottom/1920.0.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1602507180855" />
-    <state width="1809" height="289" key="GridCell.Tab.0.center" timestamp="1602507180855">
-      <screen x="65" y="24" width="1855" height="1056" />
+    <state width="1809" height="289" key="GridCell.Tab.0.center" timestamp="1602681585969">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1809" height="289" key="GridCell.Tab.0.center/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1602681585969" />
     <state width="1809" height="289" key="GridCell.Tab.0.center/1920.0.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1602507180855" />
-    <state width="1809" height="289" key="GridCell.Tab.0.left" timestamp="1602507180854">
-      <screen x="65" y="24" width="1855" height="1056" />
+    <state width="1809" height="289" key="GridCell.Tab.0.left" timestamp="1602681585968">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1809" height="289" key="GridCell.Tab.0.left/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1602681585968" />
     <state width="1809" height="289" key="GridCell.Tab.0.left/1920.0.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1602507180854" />
-    <state width="1809" height="289" key="GridCell.Tab.0.right" timestamp="1602507180855">
-      <screen x="65" y="24" width="1855" height="1056" />
+    <state width="1809" height="289" key="GridCell.Tab.0.right" timestamp="1602681585969">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1809" height="289" key="GridCell.Tab.0.right/1920.0.1920.1080/65.24.1855.1056@1920.0.1920.1080" timestamp="1602681585969" />
     <state width="1809" height="289" key="GridCell.Tab.0.right/1920.0.1920.1080/65.24.1855.1056@65.24.1855.1056" timestamp="1602507180855" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/crf.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NER$lr_demo.coverage" NAME="lr_demo Coverage Results" MODIFIED="1602506969835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NER$main.coverage" NAME="main Coverage Results" MODIFIED="1602505217031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NER$lr_demo.coverage" NAME="lr_demo Coverage Results" MODIFIED="1602680773992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NER$main.coverage" NAME="main Coverage Results" MODIFIED="1602681512320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

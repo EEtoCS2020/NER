@@ -15,13 +15,14 @@ class CRF(keras.layers.Layer):
         # self.softmax_b = tf.Variable("softmax_b", [14], initializer=self.initializer)
 
     def build(self, input_shape):
-        self.trans_params = self.add_weight(shape=(14, 14), initializer='random_normal',
-                                            trainable=True)
+        # self.trans_params = self.add_weight(shape=(14, 14), initializer='random_normal',
+        #                                     trainable=True)
         self.softmax_w = self.add_weight(shape=(200, 14),
                                      initializer='random_normal')
         self.softmax_b = self.add_weight(shape=(14,), initializer='random_normal')
 
     def call(self, inputs, **kwargs):
+        print(inputs.shape)
         logits = tf.matmul(inputs, self.softmax_w) + self.softmax_b
         logits = tf.reshape(logits, [-1, 300, 14])
         return logits
