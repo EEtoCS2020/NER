@@ -9,10 +9,10 @@ crf_decode = tfa.text.crf_decode
 class CRF(keras.layers.Layer):
     def __int__(self):
         super(CRF, self).__init__()
-        # self.initializer = tf.keras.initializers.RandomNormal()
-        # self.softmax_w = tf.Variable("softmax_w", [200, 14],
-        #                              initializer=self.initializer)
-        # self.softmax_b = tf.Variable("softmax_b", [14], initializer=self.initializer)
+        self.initializer = tf.keras.initializers.RandomNormal()
+        self.softmax_w = tf.Variable("softmax_w", [200, 14],
+                                     initializer=self.initializer)
+        self.softmax_b = tf.Variable("softmax_b", [14], initializer=self.initializer)
 
     def build(self, input_shape):
         # self.trans_params = self.add_weight(shape=(14, 14), initializer='random_normal',
