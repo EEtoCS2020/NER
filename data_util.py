@@ -133,28 +133,34 @@ class DataManager:
                 sample[i] += [self.token2id[self.PADDING] for _ in range(self.max_sequence_length - len(sample[i]))]
         return sample
 
-    def prepare(self, tokens, labels, is_padding=True, return_psyduo_label=False):
+    def prepare(self, chars, tokens, labels, is_padding=True, return_psyduo_label=False):
         X = []
         y = []
+        querys = []
         y_psyduo = []
         tmp_x = []
         tmp_y = []
+        tmp_q = ''
         tmp_y_psyduo = []
 
-        for record in zip(tokens, labels):
+        for record in zip(tokens, labels, chars):
             c = record[0]
             l = record[1]
+            ch = record[2]
             if c == -1:  # empty line
                 if len(tmp_x) <= self.max_sequence_length:
                     X.append(tmp_x)
                     y.append(tmp_y)
+                    querys.append(tmp_q)
                     if return_psyduo_label: y_psyduo.append(tmp_y_psyduo)
                 tmp_x = []
                 tmp_y = []
+                tmp_q = ''
                 if return_psyduo_label: tmp_y_psyduo = []
             else:
                 tmp_x.append(c)
                 tmp_y.append(l)
+                tmp_q += ' ' + ch
                 if return_psyduo_label: tmp_y_psyduo.append(self.label2id["O"])
         if is_padding:
             X = np.array(self.padding(X))
@@ -165,7 +171,7 @@ class DataManager:
             y_psyduo = np.array(self.padding(y_psyduo))
             return X, y_psyduo
 
-        return X, y
+        return X, y, querys
 
     def getTrainingSet(self, train_val_ratio=0.9):
         df_train = read_csv_(self.train_file, names=["token", "label"])
@@ -175,27 +181,31 @@ class DataManager:
         df_train["label_id"] = df_train.label.map(lambda x: -1 if str(x) == str(np.nan) else self.label2id[x])
 
         # convert the data in maxtrix
-        X, y = self.prepare(df_train["token_id"], df_train["label_id"])
-
+        X, y, querys = self.prepare(df_train['token'], df_train["token_id"], df_train["label_id"], is_padding=False)
+        print(len(X))
+        print(len(querys))
         # shuffle the samples
         num_samples = len(X)
         indexs = np.arange(num_samples)
         np.random.shuffle(indexs)
         X = X[indexs]
         y = y[indexs]
-
+        querys = [querys[index] for index in indexs]
         if self.dev_file != None:
             X_train = X
             y_train = y
-            X_val, y_val = self.getValidingSet()
+            q_train = querys
+            X_val, y_val, q_val = self.getValidingSet()
         else:
             # split the data into train and validation set
             X_train = X[:int(num_samples * train_val_ratio)]
             y_train = y[:int(num_samples * train_val_ratio)]
+            q_train = querys[:int(num_samples * train_val_ratio)]
             X_val = X[int(num_samples * train_val_ratio):]
             y_val = y[int(num_samples * train_val_ratio):]
+            q_val = querys[int(num_samples * train_val_ratio):]
 
-        return X_train, y_train, X_val, y_val
+        return X_train, y_train, q_train, X_val, y_val, q_val
 
     def getValidingSet(self):
         df_val = read_csv_(self.dev_file, names=["token", "label"])
@@ -203,8 +213,8 @@ class DataManager:
         df_val["token_id"] = df_val.token.map(lambda x: self.mapFunc(x, self.token2id))
         df_val["label_id"] = df_val.label.map(lambda x: -1 if str(x) == str(np.nan) else self.label2id[x])
 
-        X_val, y_val = self.prepare(df_val["token_id"], df_val["label_id"])
-        return X_val, y_val
+        X_val, y_val, querys = self.prepare(df_val['token'], df_val["token_id"], df_val["label_id"], is_padding=False)
+        return X_val, y_val, querys
 
     def getTestingSet(self):
         df_test = read_csv_(self.test_file, names=None)
@@ -220,7 +230,7 @@ class DataManager:
 
         X_test_id, y_test_psyduo_label = self.prepare(df_test["token_id"], df_test["token_id"],
                                                       return_psyduo_label=True)
-        X_test_token, _ = self.prepare(df_test["token"], df_test["token"])
+        X_test_token, _ = self.prepare(df_test["token"], df_test["token"], is_padding=False)
         return X_test_id, y_test_psyduo_label, X_test_token
 
     def mapFunc(self, x, token2id):
